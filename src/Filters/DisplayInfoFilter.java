@@ -14,7 +14,19 @@ public class DisplayInfoFilter implements PixelFilter {
     public DImage processImage(DImage img) {
         short[][] grid = img.getBWPixelGrid();
 
-        System.out.println("Image is " + grid.length + " by "+ grid[0].length);
+        // NOTHING TO VIEW
+        // Instead do all the filtering inside getInfo so we can return a String
+
+        return img;
+    }
+
+    // You can do all the image filtering here.  Instead of returning a Dimage
+    // output a String with the information you care about.
+    public String getInfo(DImage img) {
+        short[][] grid = img.getBWPixelGrid();
+
+        String output = "";
+        output += "Image is " + grid.length + " by "+ grid[0].length;
 
         int blackCount = 0;
         int whiteCount = 0;
@@ -25,11 +37,11 @@ public class DisplayInfoFilter implements PixelFilter {
             }
         }
 
-        System.out.println(blackCount + " nearly black pixels and " + whiteCount + " nearly white pixels");
-        System.out.println("----------------------------------------");
-        System.out.println("If you want, you could output information to a file instead of printing it.");
+        output += " with " + blackCount + " nearly black pixels and " + whiteCount + " nearly white pixels\n";
+        output += "----------------------------------------\n";
+        output += "If you want, you could output information to a file instead of printing it.\n";
 
-        return img;
+        return output;
     }
 }
 

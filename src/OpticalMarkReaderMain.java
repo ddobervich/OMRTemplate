@@ -7,30 +7,38 @@ import javax.swing.*;
 import java.io.File;
 
 public class OpticalMarkReaderMain {
+
+    /* =====================================================================
+    |  This will NOT display anything.  Run VisualFilterTest for that.
+    |
+    |  This is for batch processing ALL the pdf pages to putout csv files.
+    ==================================================================== */
+
     public static void main(String[] args) {
+        // --------- example code -------------------
         String pathToPdf = fileChooser();
         System.out.println("Loading pdf at " + pathToPdf);
 
-        /*
-        Your code here to...
-        (1).  Load the pdf
-        (2).  Loop over its pages
-        (3).  Create a DImage from each page and process its pixels
-        (4).  Output 2 csv files
-         */
-
-    }
-
-    private static void RunTheFilter() {
-        System.out.println("Loading pdf....");
         PImage in = PDFHelper.getPageImage("assets/OfficialOMRSampleDoc.pdf",1);
         DImage img = new DImage(in);       // you can make a DImage from a PImage
 
         System.out.println("Running filter on page 1....");
+
+        // EXAMPLE filter that outputs information instead of displaying things
         DisplayInfoFilter filter = new DisplayInfoFilter();
-        filter.processImage(img);  // if you want, you can make a different method
-        // that does the image processing an returns a DTO with
-        // the information you want
+        String imageinfo = filter.getInfo(img);
+
+        System.out.println(imageinfo);
+        // -----------------------------------------
+
+        /* ===========================================
+        REPLACE the above code with new code that will...
+        (1).  Load the pdf
+        (2).  Loop over all of its pages
+        (3).  Create a DImage from each page and process its pixels
+        (4).  Output 2 csv files
+        ===============================================
+         */
 
     }
 
